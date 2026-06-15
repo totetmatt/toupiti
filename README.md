@@ -5,7 +5,6 @@ Used for the release The Vortex / ヴォルテックス at Sessions demoparty ht
 
 The 2 button click are there to avoid fullscreen message. First clikc to put in fullscreen, then wait, then another click to start
 
-
 ## Dependcies 
 - terser : for js minification
 - jsexe : for bundling everything as a png
