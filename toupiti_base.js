@@ -40,14 +40,7 @@ document.body.onclick = () =>{
 		t,
 		0,
 	);
-	c(q=g.createProgram(),`#version 300 es
-		precision highp float;uniform float r;out vec2 dest;
-		#define BPM 140.
-		#define PI 3.1415
-		#define TAU 6.28318530718
-		#define FBI floatBitsToInt
-		#define FFBI(a)FBI(cos(a))^FBI(a)
-		float hash(vec2 uv){int x=FFBI(uv.x),y=FFBI(uv.y);return float((x*x+y)*(y*y-x)+x)/2.14e9;}float kick(float t){return t<0.?0.:exp(-4.*t)*sin(TAU*(12.5*t-4.*(exp(-40.*t)+exp(-2e2*t))));}void main(){dest=vec2(0);float T=mod((gl_FragCoord.x+4096.*gl_FragCoord.y)/r,60.),tt=mod(fract(T/2.*BPM/60.),4.),sq=mod(T,30.),q=mix(1.05,.9,smoothstep(0.,1.,T));dest+=clamp(smoothstep(-.5,.5,sin(TAU*55.*(tt*q))+.1*sin(cos(TAU*55.*tt*q)+TAU*110.*(tt*q))),-.9,.9);dest+=tanh(2.*kick(fract(T*140./60.)));for(float i=1.;i++<32.&&T>30.;){float sc=smoothstep(.1,.9,i/32.);dest+=.1*exp(-3.*clamp(fract(tt-sc),.2,.95))*sin(tt*TAU*550.*sc+cos(tt*TAU*550.*sc));}int step=int(floor(T/2.*BPM/60.))%4;q=log2(8.);float a[4]=float[4](990./q,990./q,990./q,990.);for(float i=1.;i++<8.&&sq>3.5;){float r=hash(vec2(T,i));dest+=sin(a[step]*T*TAU+i/8.)*exp(-30.*smoothstep(.1,.3,fract(tt+i/8.)))/i;dest+=sin(a[step]/2.*T*TAU+i/8.)*exp(-30.*smoothstep(.1,.3,fract(tt+i/8.)))/i;if(sq>10.)dest+=sin(a[step]*T*6.28+r)*exp(-30.*smoothstep(.1,.3,fract(tt)))/8.;}}`
+	c(q=g.createProgram(),`#MS#`
 		)
    
 
@@ -91,10 +84,8 @@ g.bindFramebuffer( 0x8d40,  null);
 	(draw =() => {
 
 	
-			g.useProgram(p);
-	
-	
-	g.viewport(0, 0,g.canvas.width = V.clientWidth, g.canvas.height = V.clientHeight);	// Clear the canvas
+		g.useProgram(p);
+		g.viewport(0, 0,g.canvas.width = V.clientWidth, g.canvas.height = V.clientHeight);	// Clear the canvas
 		g.uniform3f(g.getUniformLocation(p, 't'),V.clientWidth,V.clientHeight,(f++)/60*140/60);
 		g.drawArrays(5, 0, 4);
 

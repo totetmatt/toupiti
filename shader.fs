@@ -20,7 +20,7 @@ vec3 hash3d(vec3 p){
     vec2 id  = floor(uv);
 
 
-        uv.y += t.z*mix(.5,1.5,hash3d(vec3(id.xx,-1u)).x);
+        uv.y += (floor(t.z)+smoothstep(.1,.9,fract(t.z)))*mix(.5,1.5,hash3d(vec3(id.xx,-1u)).x);
         
         id  = floor(uv);
         vec3 rnd =hash3d(vec3(id,-1u));
